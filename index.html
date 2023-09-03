@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>ECE GPA/CGPA Calculator</title>
+<link href="templates/ohohohoh.jpg" rel="icon"/>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #070707;
+            margin: 0;
+            padding: 0;
+        }
+        
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #007bff;
+        }
+
+        form {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        select,
+        input[type="text"],
+        input[type="number"] {
+            width: 95%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button[type="submit"],
+        button[type="reset"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            
+            transition: background-color 0.65s ease;
+        }
+
+        button[type="submit"]:hover,
+        button[type="reset"]:hover {
+            background-color: #000000;
+        }
+
+        
+        .animate {
+            animation-name: fadeIn;
+            animation-duration: 1s;
+        }
+
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+        p {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #007bff;
+        }
+        hover-button {
+            text-align: center;
+            margin-top: 1000px;
+            margin-bottom: 1000px; 
+        }
+    </style>
+</head>
+<body>
+<h1>ECE GPA/CGPA Calculator</h1>
+<form action="/calculate" method="post">
+<label for="hm">Do you have H/M:</label>
+<select name="hm" required="">
+<option value=""></option>"
+            <option value="yes">Yes</option>
+<option value="no">No</option>
+</select>
+<br/>
+<label for="semester">Select Semester:</label>
+<select name="semester" required="">
+<option value="">Select The Semester</option>"
+            <option value="1">First Semester</option>
+<option value="2">Second Semester</option>
+<option value="3">Third Semester</option>
+<option value="4">Fourth Semester</option>
+<option value="5">Fifth Semester</option>
+<option value="6">Sixth Semester</option>
+<option value="7">Seventh Semester</option>
+<option value="8">Eighth Semester</option>
+<option value="total">Total CGPA</option>
+</select>
+<br/>
+<div id="first_semester" style="display:none;">
+<h2>First Semester Subjects</h2>
+<label for="mathematics_1">Mathematics I /MA201 Grade:</label>
+<input name="mathematics_1" type="text"/>
+<br/>
+<label for="basic_electrical_engineering">Basic Electrical Engineering /EE201 Grade:</label>
+<input name="basic_electrical_engineering" type="text"/>
+<br/>
+<label for="programming_for_problem_Solvings">Programming for problem Solving /CS201 Grade:</label>
+<input name="programming_for_problem_Solvings" type="text"/>
+<br/>
+<label for="engineering_graphics_and_computer_aided_drawing">Engineering Graphics And Computer Aided Drawing /ME202 Grade:</label>
+<input name="engineering_graphics_and_computer_aided_drawing" type="text"/>
+<br/>
+<label for="electrical_engineering_laboratory">Basic Electrical Engineering Laboratory /EE202 Grade:</label>
+<input name="electrical_engineering_laboratory" type="text"/>
+<br/>
+<label for="programming_laboratory">Programming Laboratory /CS202 Grade:</label>
+<input name="programming_laboratory" type="text"/>
+<br/>
+</div>
+<div id="second_semester" style="display:none;">
+<h2>Second Semester Subjects</h2>
+<label for="mathematics_2">Mathematics II /MA202 Grade:</label>
+<input name="mathematics_2" type="text"/>
+<br/>
+<label for="physics">Physics /PH201 Grade:</label>
+<input name="physics" type="text"/>
+<br/>
+<label for="chemistry">Chemistry /CY201 Grade:</label>
+<input name="chemistry" type="text"/>
+<br/>
+<label for="english_for_communication">English for Communication /HS201 Grade:</label>
+<input name="english_for_communication" type="text"/>
+<br/>
+<label for="Workshop_and_manufacturing_practice">Workshop and Manufacturing Practice /ME201 Grade:</label>
+<input name="Workshop_and_manufacturing_practice" type="text"/>
+<br/>
+<label for="physics_laboratory">Physics Laboratory /PH202 Grade:</label>
+<input name="physics_laboratory" type="text"/>
+<br/>
+<label for="chemistry_laboratory">Chemistry Laboratory /CY202 Grade:</label>
+<input name="chemistry_laboratory" type="text"/>
+<br/>
+</div>
+<div id="third_semester" style="display:none;">
+<h2>Third Semester Subjects</h2>
+<label for="linear_algebra">Linear Algebra, Numerical Methods and Random Processes /MA205 Grade:</label>
+<input name="linear_algebra" type="text"/>
+<br/>
+<label for="Circuits_and_networks">Circuits and Networks /EC201 Grade:</label>
+<input name="Circuits_and_networks" type="text"/>
+<br/>
+<label for="Electronic_devices_and_circuits">Electronic Devices and Circuits /EC202 Grade:</label>
+<input name="Electronic_devices_and_circuits" type="text"/>
+<br/>
+<label for="Electromagnetic_waves_and_fields">Electromagnetic Waves and Fields /EC203 Grade:</label>
+<input name="Electromagnetic_waves_and_fields" type="text"/>
+<br/>
+<label for="Digital_system_design">Digital System Design /EC204 Grade:</label>
+<input name="Digital_system_design" type="text"/>
+<br/>
+<label for="Data_structures">Data Structures and Object- Oriented Programming /CS234 Grade:</label>
+<input name="Data_structures" type="text"/>
+<br/>
+<label for="Electronic_devices ">Electronic Devices and Networks Laboratory /EC205 Grade:</label>
+<input name="Electronic_devices" type="text"/>
+<br/>
+<label for="Data_structures_lab">Data Structures and Object- Oriented Programming Laboratory/CS235 Grade:</label>
+<input name="Data_structures_lab" type="text"/>
+<br/>
+<div id="gokul22">
+<label for="Semiconductor_technology">H/M Grade:</label>
+<input name="Semiconductor_technology" type="text"/>
+<br/>
+</div>
+</div>
+<div id="fourth_semester" style="display:none;">
+<h2>Fourth Semester Subjects</h2>
+<label for="transmission_lines">Transmission Lines and Waveguides/EC206 Grade:</label>
+<input name="transmission_lines" type="text"/>
+<br/>
+<label for="electronic_circuit_design">Electronic Circuit Design /EC207 Grade:</label>
+<input name="electronic_circuit_design" type="text"/>
+<br/>
+<label for="signals_and_systems">Signals and Systems /EC208 Grade:</label>
+<input name="signals_and_systems" type="text"/>
+<br/>
+<label for="analog_communication">Analog Communication/EC209 Grade:</label>
+<input name="analog_communication" type="text"/>
+<br/>
+<label for="computer_architecture">Computer Architecture and Organization/ECY02 Grade:</label>
+<input name="computer_architecture" type="text"/>
+<br/>
+<label for="biology_for_engineers">Biology for Engineers/SH201 Grade:</label>
+<input name="biology_for_engineers" type="text"/>
+<br/>
+<label for="digital_system_design_lab">Digital System Design Laboratory /EC210 Grade:</label>
+<input name="digital_system_design_lab" type="text"/>
+<br/>
+<label for="electronic_circuit_design_lab">Electronic Circuit Design Laboratory/EC211 Grade:</label>
+<input name="electronic_circuit_design_lab" type="text"/>
+<br/>
+<label for="analog_communication_lab">Analog Communication Laboratory/EC212 Grade:</label>
+<input name="analog_communication_lab" type="text"/>
+<br/>
+<div id="gokul">
+<label for="medical_electronics_and_informatics">H/M Grade:</label>
+<input name="medical_electronics_and_informatics" type="text"/>
+<br/>
+</div>
+</div>
+<div id="fifth_semester" style="display:none;">
+<h2>Fifth Semester Subjects</h2>
+<label for="digital_signal_processing">Digital Signal Processing and DSP Processors/EC213 Grade:</label>
+<input name="digital_signal_processing" type="text"/>
+<br/>
+<label for="digital_communication">Digital Communication/EC214 Grade:</label>
+<input name="digital_communication" type="text"/>
+<br/>
+<label for="microprocessors_microcontrollers">Microprocessors and Microcontrollers/CS236 Grade:</label>
+<input name="microprocessors_microcontrollers" type="text"/>
+<br/>
+<label for="entrepreneurship">Entrepreneurship/EP201 Grade:</label>
+<input name="entrepreneurship" type="text"/>
+<br/>
+<label for="antennas_wave_propagation">Antennas and Wave Propagation/ECY03 Grade:</label>
+<input name="antennas_wave_propagation" type="text"/>
+<br/>
+<label for="oec">OEC Grade:</label>
+<input name="oec" type="text"/>
+<br/>
+<label for="digital_signal_processing_lab">Digital Signal Processing Laboratory/EC215 Grade:</label>
+<input name="digital_signal_processing_lab" type="text"/>
+<br/>
+<label for="digital_communication_lab">Digital Communication Laboratory/EC216 Grade:</label>
+<input name="digital_communication_lab" type="text"/>
+<br/>
+<label for="microprocessors_microcontrollers_lab">Microprocessors and Microcontrollers Laboratory /CS237 Grade:</label>
+<input name="microprocessors_microcontrollers_lab" type="text"/>
+<br/>
+<div id="krish">
+<label for="advanced_digital_system_design">H/M Grade:</label>
+<input name="advanced_digital_system_design" type="text"/>
+<br/>
+</div>
+</div>
+<div id="sixth_semester" style="display:none;">
+<h2>Sixth Semester Subjects</h2>
+<label for="microwave_optical_engineering">Microwave and Optical Engineering/EC217 Grade:</label>
+<input name="microwave_optical_engineering" type="text"/>
+<br/>
+<label for="data_communication_networks">Data Communication Networks/EC218 Grade:</label>
+<input name="data_communication_networks" type="text"/>
+<br/>
+<label for="vlsi_design">VLSI Design/EC219 Grade:</label>
+<input name="vlsi_design" type="text"/>
+<br/>
+<label for="control_systems_engineering">Control Systems Engineering/ECY05 Grade:</label>
+<input name="control_systems_engineering" type="text"/>
+<br/>
+<label for="industrial_management_economics">Industrial Management and Economics/HS202 Grade:</label>
+<input name="industrial_management_economics" type="text"/>
+<br/>
+<label for="oec_sixth">OEC Grade:</label>
+<input name="oec_sixth" type="text"/>
+<br/>
+<label for="microwave_optical_engineering_lab">Microwave and Optical Engineering Laboratory /EC220 Grade:</label>
+<input name="microwave_optical_engineering_lab" type="text"/>
+<br/>
+<label for="vlsi_design_lab">VLSI Design Laboratory/EC222 Grade:</label>
+<input name="vlsi_design_lab" type="text"/>
+<br/>
+<label for="data_communication_networks_lab">Data Communication Networks Laboratory/EC221 Grade:</label>
+<input name="data_communication_networks_lab" type="text"/>
+<br/>
+<div id="nonono">
+<label for="simulation_communication_systems">H/M Grade:</label>
+<input name="simulation_communication_systems" type="text"/>
+<br/>
+</div>
+</div>
+<div id="seventh_semester" style="display:none;">
+<h2>Seventh Semester Subjects</h2>
+<label for="Wireless_communication">Wireless Communication /EC223 Grade:</label>
+<input name="Wireless_communication" type="text"/>
+<br/>
+<label for="Information_theory_and_coding ">Information Theory and Coding /EC224 Grade:</label>
+<input name="Information_theory_and_coding" type="text"/>
+<br/>
+<label for="Embedded_system">Embedded System /EC225 Grade:</label>
+<input name="Embedded_system" type="text"/>
+<br/>
+<label for="Cryptography_and_network_Security">Cryptography and Network Security /ECY14 Grade:</label>
+<input name="Cryptography_and_network_Security" type="text"/>
+<br/>
+<label for="Internet_of_everything">Internet of Everything /ECY19 Grade:</label>
+<input name="Internet_of_everything" type="text"/>
+<br/>
+<label for="Wireless_communication_laboratory">Wireless Communication Laboratory /EC226 Grade:</label>
+<input name="Wireless_communication_laboratory" type="text"/>
+<br/>
+<label for="Embedded_system_laboratory">Embedded System Laboratory /EC227 Grade:</label>
+<input name="Embedded_system_laboratory" type="text"/>
+<br/>
+<label for="Mini_project">Mini Project /EC228 Grade:</label>
+<input name="Mini_project" type="text"/>
+<br/>
+<div id="gokul27">
+<label for="Next_generation_networks">H/M Grade:</label>
+<input name="Next_generation_networks" type="text"/>
+<br/>
+</div>
+</div>
+<div id="eighth_semester" style="display:none;">
+<h2>Eighth Semester Subjects</h2>
+<label for="swayam_1">Open Elective through SWAYAM Grade:</label>
+<input name="swayam_1" type="text"/>
+<br/>
+<label for="swayam_2">Open Elective through SWAYAM Grade:</label>
+<input name="swayam_2" type="text"/>
+<br/>
+<label for="Comprehensive_test">Comprehensive Test /EC230 Grade:</label>
+<input name="Comprehensive_test" type="text"/>
+<br/>
+<label for="Internship">Internship /EC231 Grade:</label>
+<input name="Internship" type="text"/>
+<br/>
+<label for="Project_work">Project Work /EC232 Grade:</label>
+<input name="Project_work" type="text"/>
+<br/>
+</div>
+<div id="total_cgpa" style="display:none;">
+<h2>Total CGPA Calculation</h2>
+<label for="completed_semester">Select the number of completed semesters:</label>
+<select id="completed_semester" name="completed_semester" onclick="{mogi(value)}" required="">
+<option value="0">No Semester Selected</option>
+<option value="2">Second Semester Completed</option>
+<option value="3">Third Semester Completed</option>
+<option value="4">Fourth Semester Completed</option>
+<option value="5">Fifth Semester Completed</option>
+<option value="6">Sixth Semester Completed</option>
+<option value="7">Seventh Semester Completed</option>
+<option value="8">Eighth Semester Completed</option>
+</select>
+<br/>
+<div id="hide1" style="visibility:hidden;">
+<label for="first_sem_gpa">Enter your First semester GPA:</label>
+<input max="10" min="0" name="first_sem_gpa" step="0.01" type="number"/>
+<br/>
+</div>
+<div id="hide2" style="visibility: hidden;">
+<label for="second_sem_gpa">Enter your Second semester GPA:</label>
+<input max="10" min="0" name="second_sem_gpa" step="0.01" type="number"/>
+<br/>
+</div>
+<div id="hide3" style="visibility: hidden;">
+<label for="third_sem_gpa">Enter your Third semester GPA:</label>
+<input max="10" min="0" name="third_sem_gpa" step="0.01" type="number"/>
+<br/>
+</div>
+<div id="hide4" style="visibility: hidden;">
+<label for="fourth_sem_gpa">Enter your Fourth semester GPA:</label>
+<input max="10" min="0" name="fourth_sem_gpa" step="0.01" type="number"/>
+<br/>
+</div>
+<div id="hide5" style="visibility: hidden;">
+<label for="fifth_sem_gpa">Enter your Fifth semester GPA:</label>
+<input max="10" min="0" name="fifth_sem_gpa" step="0.01" type="number"/>
+<br/>
+</div>
+<div id="hide6" style="visibility: hidden;">
+<label for="sixth_sem_gpa">Enter your Sixth semester GPA:</label>
+<input max="10" min="0" name="sixth_sem_gpa" step="0.01" type="number"/>
+<br/>
+</div>
+<div id="hide7" style="visibility: hidden;">
+<label for="seventh_sem_gpa">Enter your Seventh semester GPA:</label>
+<input max="10" min="0" name="seventh_sem_gpa" step="0.01" type="number"/>
+<br/>
+</div>
+<div id="hide8" style="visibility: hidden;">
+<label for="eighth_sem_gpa">Enter your Eighth semester GPA:</label>
+<input max="10" min="0" name="eighth_sem_gpa" step="0.01" type="number"/>
+<br/>
+</div>
+</div>
+<button type="submit">Calculate</button>
+<button type="reset">Reset</button>
+</form>
+<p>{{ result }}</p>
+<script>
+        
+        const semesterDropdown = document.querySelector('select[name="semester"]');
+        semesterDropdown.addEventListener('change', function () {
+            const selectedSemester = semesterDropdown.value;
+            const semesterDivs = document.querySelectorAll('#fourth_semester, #fifth_semester, #sixth_semester, #total_cgpa, #first_semester, #second_semester, #third_semester, #seventh_semester, #eighth_semester');
+            semesterDivs.forEach(div => div.style.display = 'none');
+    
+            if (selectedSemester === '4') {
+                document.querySelector('#fourth_semester').style.display = 'block';
+            } else if (selectedSemester === '5') {
+                document.querySelector('#fifth_semester').style.display = 'block';
+            } else if (selectedSemester === '6') {
+                document.querySelector('#sixth_semester').style.display = 'block';
+            } else if (selectedSemester === 'total') {
+                document.querySelector('#total_cgpa').style.display = 'block';
+            }else if (selectedSemester === '1') {
+                document.querySelector('#first_semester').style.display = 'block';
+            }else if (selectedSemester === '2') {
+                document.querySelector('#second_semester').style.display = 'block';
+            }else if (selectedSemester === '3') {
+                document.querySelector('#third_semester').style.display = 'block';
+            }else if (selectedSemester === '7') {
+                document.querySelector('#seventh_semester').style.display = 'block';
+            }else if (selectedSemester === '8') {
+                document.querySelector('#eighth_semester').style.display = 'block';
+            }
+
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            const hmSelect = document.querySelector('select[name="hm"]');
+            const medicalElectronics = document.querySelector('input[name="medical_electronics_and_informatics"]');
+            const advancedDigitalSystemDesign = document.querySelector('input[name="advanced_digital_system_design"]');
+            const simulationCommunicationSystems = document.querySelector('input[name="simulation_communication_systems"]');
+
+            hmSelect.addEventListener('change', function () {
+                if (hmSelect.value === 'yes') {
+                    document.getElementById("gokul").innerHTML='<label for="medical_electronics_and_informatics">H/M Grade:</label><input type="text" name="medical_electronics_and_informatics" ><br>';
+                    document.getElementById("krish").innerHTML='<label for="advanced_digital_system_design">H/M Grade:</label><input type="text" name="advanced_digital_system_design" ><br>';
+                    document.getElementById("nonono").innerHTML='<label for="simulation_communication_systems">H/M Grade:</label><input type="text" name="simulation_communication_systems" ><br>';
+                    document.getElementById("gokul22").innerHTML='<label for="Semiconductor_technology">H/M Grade:</label><input type="text" name="Semiconductor_technology" ><br>';
+                    document.getElementById("gokul27").innerHTML='<label for="Next_generation_networks">H/M Grade:</label><input type="text" name="Next_generation_networks" ><br>';
+                    medicalElectronics.parentNode.style.display = 'block';
+                    advancedDigitalSystemDesign.parentNode.style.display = 'block';
+                    simulationCommunicationSystems.parentNode.style.display = 'block';
+                } else {
+                    document.getElementById("gokul").innerHTML="";
+                    document.getElementById("krish").innerHTML="";
+                    document.getElementById("nonono").innerHTML="";
+                    document.getElementById("gokul22").innerHTML="";
+                    document.getElementById("gokul27").innerHTML="";
+                    medicalElectronics.parentNode.style.display = 'none';
+                    advancedDigitalSystemDesign.parentNode.style.display = 'none';
+                    simulationCommunicationSystems.parentNode.style.display = 'none';
+                }
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+        const semesterDropdown = document.querySelector('select[name="semester"]');
+        const semesterDivs = document.querySelectorAll('#fourth_semester, #fifth_semester, #sixth_semester, #total_cgpa, #first_semester, #second_semester, #third_semester, #seventh_semester, #eighth_semester');
+
+        semesterDropdown.addEventListener('change', function () {
+            const selectedSemester = semesterDropdown.value;
+
+        
+            semesterDivs.forEach(div => div.classList.remove('animate'));
+
+        
+            if (selectedSemester === '4') {
+                document.querySelector('#fourth_semester').classList.add('animate');
+            } else if (selectedSemester === '5') {
+                document.querySelector('#fifth_semester').classList.add('animate');
+            } else if (selectedSemester === '6') {
+                document.querySelector('#sixth_semester').classList.add('animate');
+            } else if (selectedSemester === 'total') {
+                document.querySelector('#total_cgpa').classList.add('animate');
+            }else if (selectedSemester === '1') {
+                document.querySelector('#first_semester').classList.add('animate');
+            }else if (selectedSemester === '2') {
+                document.querySelector('#second_semester').classList.add('animate');
+            }else if (selectedSemester === '3') {
+                document.querySelector('#third_semester').classList.add('animate');
+            }else if (selectedSemester === '7') {
+                document.querySelector('#seventh_semester').classList.add('animate');
+            }else if (selectedSemester === '8') {
+                document.querySelector('#eighth_semester').classList.add('animate');
+            }
+        });
+    });
+function mogi(value) { 
+
+output =value;
+switch(output)
+{
+    case'0':
+    document.getElementById('hide1').style.setProperty("visibility","hidden");
+        document.getElementById('hide2').style.setProperty("visibility","hidden");    
+
+        document.getElementById('hide3').style.setProperty("visibility","hidden");    
+
+        document.getElementById('hide4').style.setProperty("visibility","hidden");    
+
+        document.getElementById('hide5').style.setProperty("visibility","hidden");    
+        document.getElementById('hide6').style.setProperty("visibility","hidden");
+        document.getElementById('hide7').style.setProperty("visibility","hidden");
+        document.getElementById('hide8').style.setProperty("visibility","hidden");
+        break;
+    case '1':
+    document.getElementById('hide1').style.setProperty("visibility","visible");
+        document.getElementById('hide2').style.setProperty("visibility","hidden");    
+
+        document.getElementById('hide3').style.setProperty("visibility","hidden");    
+
+        document.getElementById('hide4').style.setProperty("visibility","hidden");    
+
+        document.getElementById('hide5').style.setProperty("visibility","hidden");    
+        document.getElementById('hide6').style.setProperty("visibility","hidden");
+        document.getElementById('hide7').style.setProperty("visibility","hidden");
+        document.getElementById('hide8').style.setProperty("visibility","hidden");
+        break;
+    case '2':
+        document.getElementById('hide1').style.setProperty("visibility","visible");
+        document.getElementById('hide2').style.setProperty("visibility","visible");    
+
+        document.getElementById('hide3').style.setProperty("visibility","hidden");    
+
+        document.getElementById('hide4').style.setProperty("visibility","hidden");    
+
+        document.getElementById('hide5').style.setProperty("visibility","hidden");    
+        document.getElementById('hide6').style.setProperty("visibility","hidden"); 
+        document.getElementById('hide7').style.setProperty("visibility","hidden");
+        document.getElementById('hide8').style.setProperty("visibility","hidden");   
+
+        break;
+    case '3':
+    document.getElementById('hide1').style.setProperty("visibility","visible");
+        document.getElementById('hide2').style.setProperty("visibility","visible");
+        document.getElementById('hide3').style.setProperty("visibility","visible");    
+
+        document.getElementById('hide4').style.setProperty("visibility","hidden");    
+
+        document.getElementById('hide5').style.setProperty("visibility","hidden");    
+        document.getElementById('hide6').style.setProperty("visibility","hidden");
+        document.getElementById('hide7').style.setProperty("visibility","hidden");
+        document.getElementById('hide8').style.setProperty("visibility","hidden");       
+        break;
+    case '4':
+    document.getElementById('hide1').style.setProperty("visibility","visible");
+        document.getElementById('hide2').style.setProperty("visibility","visible");    
+
+        document.getElementById('hide3').style.setProperty("visibility","visible");    
+
+        document.getElementById('hide4').style.setProperty("visibility","visible");    
+
+        document.getElementById('hide5').style.setProperty("visibility","hidden");    
+        document.getElementById('hide6').style.setProperty("visibility","hidden");
+        document.getElementById('hide7').style.setProperty("visibility","hidden");
+        document.getElementById('hide8').style.setProperty("visibility","hidden");
+        break;
+    case '5':
+    document.getElementById('hide1').style.setProperty("visibility","visible");
+        document.getElementById('hide2').style.setProperty("visibility","visible");    
+
+        document.getElementById('hide3').style.setProperty("visibility","visible");    
+
+        document.getElementById('hide4').style.setProperty("visibility","visible");    
+
+        document.getElementById('hide5').style.setProperty("visibility","visible");    
+        document.getElementById('hide6').style.setProperty("visibility","hidden");
+        document.getElementById('hide7').style.setProperty("visibility","hidden");
+        document.getElementById('hide8').style.setProperty("visibility","hidden");
+        break;
+    case '6':
+    document.getElementById('hide1').style.setProperty("visibility","visible");
+        document.getElementById('hide2').style.setProperty("visibility","visible");    
+
+        document.getElementById('hide3').style.setProperty("visibility","visible");    
+
+        document.getElementById('hide4').style.setProperty("visibility","visible");    
+
+        document.getElementById('hide5').style.setProperty("visibility","visible");    
+        document.getElementById('hide6').style.setProperty("visibility","visible");
+        document.getElementById('hide7').style.setProperty("visibility","hidden");
+        document.getElementById('hide8').style.setProperty("visibility","hidden");
+        break;
+    case '7':
+    document.getElementById('hide1').style.setProperty("visibility","visible");
+        document.getElementById('hide2').style.setProperty("visibility","visible");    
+
+        document.getElementById('hide3').style.setProperty("visibility","visible");    
+
+        document.getElementById('hide4').style.setProperty("visibility","visible");    
+
+        document.getElementById('hide5').style.setProperty("visibility","visible");    
+        document.getElementById('hide6').style.setProperty("visibility","visible");
+        document.getElementById('hide7').style.setProperty("visibility","visible");
+        document.getElementById('hide8').style.setProperty("visibility","hidden");
+        break;  
+    case '8':
+    document.getElementById('hide1').style.setProperty("visibility","visible");
+        document.getElementById('hide2').style.setProperty("visibility","visible");    
+
+        document.getElementById('hide3').style.setProperty("visibility","visible");    
+
+        document.getElementById('hide4').style.setProperty("visibility","visible");    
+
+        document.getElementById('hide5').style.setProperty("visibility","visible");    
+        document.getElementById('hide6').style.setProperty("visibility","visible");
+        document.getElementById('hide7').style.setProperty("visibility","visible");
+        document.getElementById('hide8').style.setProperty("visibility","visible");
+        break;      
+    default:
+    break;
+}
+}
+    </script>
+</body>
+</html>
